@@ -1,7 +1,10 @@
-module Main where
+module Lib
+    ( lib
+    ) where
 
 -- http://hackage.haskell.org/package/optparse-applicative
 import Options.Applicative
+import Data.Semigroup ((<>))
 
 -- parser
 data Sample = Sample
@@ -23,8 +26,8 @@ greet :: Sample -> IO ()
 greet (Sample h False) = putStrLn $ "Hello, " ++ h
 greet _ = return ()
 
-main :: IO ()
-main = execParser opts >>= greet
+lib :: IO ()
+lib = execParser opts >>= greet
   where
     opts = info (helper <*> sample)
       ( fullDesc
